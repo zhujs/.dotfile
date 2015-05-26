@@ -1,0 +1,24 @@
+set completion-ignore-case on
+
+# List all matches immediately
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+
+# ask for confirmation when more than 200 items
+set completion-query-items 200
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# quote the current or previous word
+"\C-xq": "\eb\"\ef\""

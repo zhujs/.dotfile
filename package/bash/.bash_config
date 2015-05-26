@@ -1,0 +1,70 @@
+# put useful commands here
+export MARKPATH=$HOME/.marks
+export PATH="$PATH:~/bin"
+
+function jump {
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+
+
+function mark {
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+
+function unmark {
+    rm -i "$MARKPATH/$1"
+}
+
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+
+
+_completemarks() {
+    # COMP_WORDS: 命令行中的所有输入单词
+    # COMP_CWORD: 光标下输入单词的索引
+    local curw=${COMP_WORDS[COMP_CWORD]}
+    local wordlist=$(find $MARKPATH -type l -printf "%f\n" 2> /dev/null )
+
+    # compgen -W: 返回以$curw为前缀的words
+    # COMPREPLY: 候选的补全结果
+    # COMP_WORDBREAKS: 类型为字符串，表示单词之间的分隔符
+    # COMP_LINE: 类型为字符串，表示当前的命令行输入
+    COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
+    return 0
+}
+ 
+# jump unmark 使用_completemarks函数来补全
+complete -F _completemarks j jump unmark
+
+
+
+# put you aliase here
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+
+alias j='jump'
+alias rm='rm -i'
+alias py='python'
+
+type ipython > /dev/null 2>&1 && alias py='ipython'
+type vim > /dev/null 2>&1 && alias v='vim'
