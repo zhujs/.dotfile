@@ -65,6 +65,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias j='jump'
 alias rm='rm -i'
 alias py='python'
+alias ..='cd ..'
 
 type ipython > /dev/null 2>&1 && alias py='ipython'
 type vim > /dev/null 2>&1 && alias v='vim'

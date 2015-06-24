@@ -95,18 +95,24 @@ if [ -d ~/bin ]; then
 fi
 
 
-JAVA_HOME=/home/zhujs/Bin/jdk1.6.0_27
+# JAVA
+JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
 PATH=$JAVA_HOME/bin:$PATH
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME
 export CLASSPATH
 
+# MAVEN
 export M2_HOME=/home/zhujs/Bin/apache-maven-3.2.5
 export PATH=$M2_HOME/bin:$PATH
+
+# Intellij
 export PATH=$PATH:/home/zhujs/Bin/idea-IC-141.713.2/bin
 
-export HADOOP_HOME=/home/zhujs/Bin/hadoop-2.5.2
+# Hadoop
+export HADOOP_HOME=/home/zhujs/Bin/hadoop-2.4.1
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/lib
 
-export HBASE_HOME=/home/zhujs/Bin/hbase-0.98.12.1
-export PATH=$PATH:$HBASE_HOME/bin
+# Hive
+export HIVE_HOME=/home/zhujs/Bin/hive-0.13.1
+export PATH=$PATH:$HIVE_HOME/bin 

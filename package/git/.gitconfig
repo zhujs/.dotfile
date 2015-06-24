@@ -3,3 +3,7 @@
 	email = zhujs.w@outlook.com
 [color]
 	ui = true
+[core]
+	editor = vim
+[push]
+	default = matching
