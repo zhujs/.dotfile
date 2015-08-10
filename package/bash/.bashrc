@@ -95,6 +95,9 @@ if [ -d ~/bin ]; then
 fi
 
 
+# Local bin
+PATH=~/Bin:$PATH
+
 # JAVA
 JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
 PATH=$JAVA_HOME/bin:$PATH
@@ -116,3 +119,7 @@ export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/lib
 # Hive
 export HIVE_HOME=/home/zhujs/Bin/hive-0.13.1
 export PATH=$PATH:$HIVE_HOME/bin 
+
+# Hbase
+export HBASE_HOME=/home/zhujs/Bin/hbase-0.94.10-su1
+export PATH=$PATH:$HBASE_HOME/bin
