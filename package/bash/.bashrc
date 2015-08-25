@@ -59,9 +59,46 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Cursor Movement using escape sequences, <L>, <C>, <N> should be replaced with numbers, `tput` is the encouraged way to send the escape sequences
+# More infomation about escape sequence:
+#   https://en.wikipedia.org/wiki/ANSI_escape_code
+#
+# Puts the cursor at line L and column C.
+#   \033[<L>;<C>H Or \033[<L>;<C>f
+# Move the cursor up N lines:
+#   \033[<N>A
+# Move the cursor down N lines:
+#   \033[<N>B
+# Move the cursor forward N columns:
+#   \033[<N>C
+# Move the cursor backward N columns:
+#   \033[<N>D
+#
+# Clear the screen, move to (0,0):
+#   \033[2J
+# Erase to end of line:
+#   \033[K
+# Save cursor position:
+#   \033[s
+# Restore cursor position:
+#   \033[u
+
 if [ "$color_prompt" = yes ]; then
-    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    # set the color of promting string: \e[1;32m
+    # "\e[sm", where s is a semicolon-delimited list of ANSI color codes
+    # example: "\e[31;44;1m"
+    # The codes:
+    # 0  restore default color
+    # 1  brighter
+    # 2  dimmer
+    # 4  underlined text
+    # 5  flashing text
+    # 7  reverse video
+    #           black  red  green  yellow  blue  purple  cyan  white
+    # foreground  30    31    32    33    34       35    36      37
+    # background  40    41    42    43    44       45    46      47
+    #
+    # the escape sequence "\e]0;s\a" is used to set the title of an xterm,
+    # where s is the string you want to use
     PS1='${debian_chroot:+($debian_chroot)}\[\e[1;32m\]\u@\h:\w\$\[\e[0m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -70,9 +107,7 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
+xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;;
 *)
     ;;
 esac
@@ -95,6 +130,9 @@ if [ -d ~/bin ]; then
 fi
 
 
+# Local bin
+PATH=~/Bin:$PATH
+
 # JAVA
 JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
 PATH=$JAVA_HOME/bin:$PATH
@@ -116,3 +154,7 @@ export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/lib
 # Hive
 export HIVE_HOME=/home/zhujs/Bin/hive-0.13.1
 export PATH=$PATH:$HIVE_HOME/bin 
+
+# Hbase
+export HBASE_HOME=/home/zhujs/Bin/hbase-0.94.10-su1
+export PATH=$PATH:$HBASE_HOME/bin
