@@ -3,6 +3,9 @@ set completion-ignore-case on
 # List all matches immediately
 set show-all-if-ambiguous on
 
+# disable to match the hidden files
+set match-hidden-files off
+
 # Immediately add a trailing slash when autocompleting symlinks to directories
 set mark-symlinked-directories on
 
