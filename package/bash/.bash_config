@@ -1,6 +1,5 @@
 # put useful commands here
 export MARKPATH=$HOME/.marks
-export PATH="$PATH:~/bin"
 
 function jump {
     cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
