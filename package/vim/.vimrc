@@ -114,6 +114,14 @@ set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
    
+inoremap jk <ESC>
+let mapleader = ","
+
+" Toggle spelling visuals with <leader>s
+nnoremap <leader>s :set spell!<CR>
+
+" Repeat last change in visual mode
+vnoremap . :norm .<CR>
 
 " To remove a submodule you need to:
 " Delete the relevant section from the .gitmodules file.

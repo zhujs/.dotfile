@@ -100,5 +100,48 @@ alias ..='cd ..'
 type ipython > /dev/null 2>&1 && alias py='ipython'
 type vim > /dev/null 2>&1 && alias v='vim'
 
-# close the hidden files matching
-# bind 'set match-hidden-files off'
+
+
+function getAliasWordsLength () {
+    local content=$(alias "$1")
+    eval content=${content#*=}
+    echo $content
+}
+
+# function used to wrap completion function for alias
+function makeCompletionWrapper () {
+	local actualCommand="$1"
+	local actualCompFunc="$2"
+    local aliasCommand="$3"
+	local aliasCompFunc="$4"
+
+    local aliasContent=$(getAliasWordsLength $aliasCommand)
+    local aliasWordsArray=( $(getAliasWordsLength $aliasCommand) )
+    local aliasWordsArrayLength=${#aliasWordsArray[@]}
+	local function="
+function $aliasCompFunc {
+    ((COMP_CWORD=$aliasWordsArrayLength))
+
+    # remove the alias
+    currentWords=\${COMP_WORDS[@]:1}
+    COMP_WORDS=( "${aliasWordsArray[@]}" \${currentWords:-' '} )
+    COMP_LINE=\${COMP_LINE/\"\$1\"/\""${aliasContent}"\"}
+    ((COMP_POINT += ${#aliasContent} - \${#1}))
+
+    # load the completion function for actual command
+    _completion_loader "$actualCommand"
+    "$actualCompFunc"
+    return 0
+}"
+	eval "$function"
+}
+
+
+# usage of makeCompletionWrapper function
+alias get='sudo apt-get install'
+makeCompletionWrapper sudo _sudo get _get
+complete -F _get get
+
+alias drop='sudo apt-get remove'
+makeCompletionWrapper sudo _sudo drop _drop
+complete -F _drop drop
