@@ -105,7 +105,7 @@ type vim > /dev/null 2>&1 && alias v='vim'
 function getAliasWordsLength () {
     local content=$(alias "$1")
     eval content=${content#*=}
-    echo $content
+    echo -n $content
 }
 
 # function used to wrap completion function for alias
@@ -116,24 +116,34 @@ function makeCompletionWrapper () {
 	local aliasCompFunc="$4"
 
     local aliasContent=$(getAliasWordsLength $aliasCommand)
-    local aliasWordsArray=( $(getAliasWordsLength $aliasCommand) )
+
+    # safe way to convert a string into an array
+    eval local aliasWordsArray=("$aliasContent")
     local aliasWordsArrayLength=${#aliasWordsArray[@]}
 	local function="
 function $aliasCompFunc {
-    ((COMP_CWORD=$aliasWordsArrayLength))
+    # alias should be only one word
+    ((COMP_CWORD+=$aliasWordsArrayLength - 1))
 
-    # remove the alias
-    currentWords=\${COMP_WORDS[@]:1}
-    COMP_WORDS=( "${aliasWordsArray[@]}" \${currentWords:-' '} )
+    # remove the alias, convert into an array
+    # pay attention to the difference between * and @ 
+    wordsAfterAlias=( \"\${COMP_WORDS[@]:1}\" )
+
+    COMP_WORDS=( ""${aliasWordsArray[@]}"" \"\${wordsAfterAlias[@]:-}\" )
     COMP_LINE=\${COMP_LINE/\"\$1\"/\""${aliasContent}"\"}
     ((COMP_POINT += ${#aliasContent} - \${#1}))
 
     # load the completion function for actual command
-    _completion_loader "$actualCommand"
-    "$actualCompFunc"
+    _completion_loader \"$actualCommand\"
+
+    # call the actual completion function with proper arguments
+    # may not work if the current word started with a quote character
+    \"$actualCompFunc\" \"$actualCommand\" \${COMP_WORDS[COMP_CWORD]} \${COMP_WORDS[COMP_CWORD-1]}
+
     return 0
 }"
 	eval "$function"
+	#echo "$function"
 }
 
 
