@@ -120,6 +120,8 @@ function makeCompletionWrapper () {
     local aliasContent=$(getAliasWordsLength $aliasCommand)
 
     # safe way to convert a string into an array
+    # the double quotes are necessary! Preserve the leading and trailing
+    # spaces within quotes
     eval local aliasWordsArray=("$aliasContent")
     local aliasWordsArrayLength=${#aliasWordsArray[@]}
 	local function="
