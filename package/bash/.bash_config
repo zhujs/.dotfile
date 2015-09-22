@@ -94,16 +94,18 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias j='jump'
 alias e='extract'
 alias rm='rm -i'
-alias py='python'
+alias p='python'
 alias ..='cd ..'
 
-type ipython > /dev/null 2>&1 && alias py='ipython'
+type ipython > /dev/null 2>&1 && alias p='ipython'
 type vim > /dev/null 2>&1 && alias v='vim'
 
 
 
 function getAliasWordsLength () {
+    #local content=$(alias "$1" 2> /dev/null ) || { echo -n $1; exit;}
     local content=$(alias "$1")
+
     eval content=${content#*=}
     echo -n $content
 }
@@ -155,3 +157,19 @@ complete -F _get get
 alias drop='sudo apt-get remove'
 makeCompletionWrapper sudo _sudo drop _drop
 complete -F _drop drop
+
+alias gp='git push'
+makeCompletionWrapper git __git_wrap__git_main gp _gp
+complete -o bashdefault -o default -o nospace -F _gp gp
+
+alias gl='git pull'
+makeCompletionWrapper git __git_wrap__git_main gl _gl
+complete -o bashdefault -o default -o nospace -F _gl gl
+
+alias gd='git diff'
+makeCompletionWrapper git __git_wrap__git_main gd _gd
+complete -o bashdefault -o default -o nospace -F _gd gd
+
+alias gc='git commit'
+makeCompletionWrapper git __git_wrap__git_main gc _gc
+complete -o bashdefault -o default -o nospace -F _gc gc
