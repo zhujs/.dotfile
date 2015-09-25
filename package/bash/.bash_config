@@ -138,7 +138,7 @@ function $aliasCompFunc {
     ((COMP_POINT += ${#aliasContent} - \${#1}))
 
     # load the completion function for actual command
-    _completion_loader \"$actualCommand\"
+    complete -p \"$actualCommand\" &> /dev/null || _completion_loader \"$actualCommand\"
 
     # call the actual completion function with proper arguments
     # may not work if the current word started with a quote character
@@ -175,3 +175,7 @@ complete -o bashdefault -o default -o nospace -F _gd gd
 alias gc='git commit'
 makeCompletionWrapper git __git_wrap__git_main gc _gc
 complete -o bashdefault -o default -o nospace -F _gc gc
+
+alias gs='git status'
+makeCompletionWrapper git __git_wrap__git_main gs _gs
+complete -o bashdefault -o default -o nospace -F _gs gs
