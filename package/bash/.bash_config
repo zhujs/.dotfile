@@ -67,7 +67,7 @@ extract() {
 }
 
 
-# put you aliase here
+# put you aliases here
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -152,6 +152,8 @@ function $aliasCompFunc {
 
 
 # usage of makeCompletionWrapper function
+
+# alias setting for `apt`
 alias get='sudo apt-get install'
 makeCompletionWrapper sudo _sudo get _get
 complete -F _get get
@@ -160,6 +162,7 @@ alias drop='sudo apt-get remove'
 makeCompletionWrapper sudo _sudo drop _drop
 complete -F _drop drop
 
+# alias setting for `git`
 alias gp='git push'
 makeCompletionWrapper git __git_wrap__git_main gp _gp
 complete -o bashdefault -o default -o nospace -F _gp gp
@@ -179,3 +182,11 @@ complete -o bashdefault -o default -o nospace -F _gc gc
 alias gs='git status'
 makeCompletionWrapper git __git_wrap__git_main gs _gs
 complete -o bashdefault -o default -o nospace -F _gs gs
+
+
+# note that the trailing space in the alias value,
+# so we can refer to the manual page of an alias, e.g.
+#   m pg
+alias m='man '
+makeCompletionWrapper man _man m _m
+complete -F _m m
