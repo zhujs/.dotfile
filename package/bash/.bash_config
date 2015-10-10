@@ -167,9 +167,9 @@ alias gp='git push'
 makeCompletionWrapper git __git_wrap__git_main gp _gp
 complete -o bashdefault -o default -o nospace -F _gp gp
 
-alias gl='git pull'
-makeCompletionWrapper git __git_wrap__git_main gl _gl
-complete -o bashdefault -o default -o nospace -F _gl gl
+alias gpl='git pull'
+makeCompletionWrapper git __git_wrap__git_main gpl _gpl
+complete -o bashdefault -o default -o nospace -F _gpl gpl
 
 alias gd='git diff'
 makeCompletionWrapper git __git_wrap__git_main gd _gd
@@ -182,6 +182,18 @@ complete -o bashdefault -o default -o nospace -F _gc gc
 alias gs='git status'
 makeCompletionWrapper git __git_wrap__git_main gs _gs
 complete -o bashdefault -o default -o nospace -F _gs gs
+
+alias gb='git branch'
+makeCompletionWrapper git __git_wrap__git_main gb _gb
+complete -o bashdefault -o default -o nospace -F _gb gb
+
+alias gch='git checkout'
+makeCompletionWrapper git __git_wrap__git_main gch _gch
+complete -o bashdefault -o default -o nospace -F _gch gch
+
+alias gl='git log'
+makeCompletionWrapper git __git_wrap__git_main gl _gl
+complete -o bashdefault -o default -o nospace -F _gl gl
 
 
 # note that the trailing space in the alias value,
