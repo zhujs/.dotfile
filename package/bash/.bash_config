@@ -67,7 +67,7 @@ extract() {
 }
 
 
-# put you aliase here
+# put you aliases here
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -81,7 +81,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 alias c='cat'
@@ -152,6 +152,8 @@ function $aliasCompFunc {
 
 
 # usage of makeCompletionWrapper function
+
+# alias setting for `apt`
 alias get='sudo apt-get install'
 makeCompletionWrapper sudo _sudo get _get
 complete -F _get get
@@ -160,13 +162,18 @@ alias drop='sudo apt-get remove'
 makeCompletionWrapper sudo _sudo drop _drop
 complete -F _drop drop
 
+# alias setting for `git`
 alias gp='git push'
 makeCompletionWrapper git __git_wrap__git_main gp _gp
 complete -o bashdefault -o default -o nospace -F _gp gp
 
-alias gl='git pull'
-makeCompletionWrapper git __git_wrap__git_main gl _gl
-complete -o bashdefault -o default -o nospace -F _gl gl
+alias gpl='git pull'
+makeCompletionWrapper git __git_wrap__git_main gpl _gpl
+complete -o bashdefault -o default -o nospace -F _gpl gpl
+
+alias gf='git fetch'
+makeCompletionWrapper git __git_wrap__git_main gf _gf
+complete -o bashdefault -o default -o nospace -F _gf gf
 
 alias gd='git diff'
 makeCompletionWrapper git __git_wrap__git_main gd _gd
@@ -179,3 +186,34 @@ complete -o bashdefault -o default -o nospace -F _gc gc
 alias gs='git status'
 makeCompletionWrapper git __git_wrap__git_main gs _gs
 complete -o bashdefault -o default -o nospace -F _gs gs
+
+alias gsh='git stash'
+makeCompletionWrapper git __git_wrap__git_main gsh _gsh
+complete -o bashdefault -o default -o nospace -F _gsh gsh
+
+alias gr='git reset'
+makeCompletionWrapper git __git_wrap__git_main gr _gr
+complete -o bashdefault -o default -o nospace -F _gr gr
+
+alias gb='git branch'
+makeCompletionWrapper git __git_wrap__git_main gb _gb
+complete -o bashdefault -o default -o nospace -F _gb gb
+
+alias gch='git checkout'
+makeCompletionWrapper git __git_wrap__git_main gch _gch
+complete -o bashdefault -o default -o nospace -F _gch gch
+
+alias gl='git log'
+makeCompletionWrapper git __git_wrap__git_main gl _gl
+complete -o bashdefault -o default -o nospace -F _gl gl
+
+alias ga='git add'
+makeCompletionWrapper git __git_wrap__git_main ga _ga
+complete -o bashdefault -o default -o nospace -F _ga ga
+
+# note that the trailing space in the alias value,
+# so we can refer to the manual page of an alias, e.g.
+#   m pg
+alias m='man '
+makeCompletionWrapper man _man m _m
+complete -F _m m
