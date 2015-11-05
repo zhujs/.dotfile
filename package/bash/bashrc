@@ -159,5 +159,5 @@ export HIVE_HOME=/home/zhujs/Bin/hive-0.13.1
 export PATH=$PATH:$HIVE_HOME/bin 
 
 # Hbase
-export HBASE_HOME=/home/zhujs/Bin/hbase-0.94.10-su1
+export HBASE_HOME=/home/zhujs/Bin/hbase-0.96.1.1-hadoop2
 export PATH=$PATH:$HBASE_HOME/bin
