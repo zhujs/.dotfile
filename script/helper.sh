@@ -36,7 +36,8 @@ function installpackage() {
 
 # used to backup the existing files if neccesary
 function backup() {
-    if [ -d "$1" -o -f "$1" ]; then
+    # use the `ls` command to test if filename exists instead of `test`
+    if ls -d "$1" &> /dev/null ; then
         # back up the directory
         dirName=~/.dotfileBackup #/$(date "+%Y%m%d-%H:%M:%S")
         [ -d "$dirName" ] || mkdir -p $dirName
