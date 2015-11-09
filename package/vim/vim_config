@@ -1,0 +1,15 @@
+
+" put your mappings and customized commands here
+
+func! Substitute_R(old, new, ...) abort
+    let flag = a:0 > 0 ? a:1 : 'g'
+    exec ':%s/'.a:old.'/'.a:new.'/'.flag
+endf
+    
+com! -nargs=* -bar AllSubstitute 
+\ call Substitute_R(<f-args>)
+
+vmap <F3> :AllSubstitute 
+nmap <F3> :AllSubstitute 
+imap <F3> <C-O>:AllSubstitute 
+
