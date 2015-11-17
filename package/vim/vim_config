@@ -1,4 +1,4 @@
-
+" vim: filetype=vim
 " put your mappings and customized commands here
 
 func! Substitute_R(old, new, ...) abort
@@ -12,4 +12,3 @@ com! -nargs=* -bar AllSubstitute
 vmap <F3> :AllSubstitute 
 nmap <F3> :AllSubstitute 
 imap <F3> <C-O>:AllSubstitute 
-
