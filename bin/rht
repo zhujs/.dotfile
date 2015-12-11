@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+
+usage_error () {
+    echo "Usage: rht -i FILENAME" && exit 1
+}
+
+OPTIND=1
+
+# silent report of error in getopts
+# the same result as OPTERR=0
+while getopts :i opt
+do
+    case ${opt} in
+        i) override=-i ;;
+        ?) usage_error ;; # unspecified options or options that miss an argument
+        :) usage_error ;; # options that miss an argument (silent report)
+    esac
+done
+
+if [ $# -eq 0 ]
+then
+  usage_error
+fi
+
+# remove the "<.*>" string in a document
+sed $override '/</{
+    :loop
+    s/<[^<>]*>//g
+    /</{
+        N
+        b loop
+    }
+}' "$@"
