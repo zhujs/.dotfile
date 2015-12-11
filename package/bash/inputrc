@@ -25,3 +25,5 @@ set convert-meta off
 
 # quote the current or previous word
 "\C-xq": "\eb\"\ef\""
+"\C-\M-k": history-search-backward
+"\C-\M-l": history-search-forward
