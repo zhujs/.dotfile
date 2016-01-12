@@ -8,7 +8,7 @@ function info() {
 
 # used to install the packages
 function installpackage() {
-    local installCommand=
+    local installCommand=""
     
     info "Try to install $1 ..."
     
@@ -22,8 +22,14 @@ function installpackage() {
         type apt-get > /dev/null 2>&1 && installCommand="apt-get -y install" 
         # type yum > /dev/null 2>&1 && installCommand="yum -y install" 
     elif [ $(name)x == "Darwin"x ]; then
-        echo "TODO"
-        exit 1
+        # install the package manager tool for OS X if necessary
+        if ! type brew &> /dev/null
+        then
+            info "Trying to install Homebrew..."
+            ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+            info "Installation Completed."
+        fi
+        installCommand="brew install"
     fi 
 
     if [ -z installCommand ]; then
@@ -37,6 +43,7 @@ function installpackage() {
 # used to backup the existing files if neccesary
 function backup() {
     # use the `ls` command to test if filename exists instead of `test`
+    # because `ls -d` does not dereference symbolic link
     if ls -d "$1" &> /dev/null ; then
         # back up the directory
         dirName=~/.dotfileBackup #/$(date "+%Y%m%d-%H:%M:%S")
