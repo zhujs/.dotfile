@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+
+[[ $# -lt 2 ]] && echo "Usage: jfound CLASS JARPACKAGE [...]"
+
+javaClass="$1"
+shift
+
+for javaJar in "$@"
+do
+    if [[ $javaJar == *.jar && -f $javaJar ]]
+    then
+        output=$(jar tvf "$javaJar" | grep "$javaClass")
+        if [[ -n "$output" ]]
+        then
+            echo ">>>>>> Found in $javaJar <<<<<<"
+            echo "$output"
+            echo ""
+        fi
+    fi
+done
