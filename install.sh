@@ -20,9 +20,10 @@ createSymlink $DOTFILES_DIR/bin ~/bin
 # install all the packages and set the configuration files
 source $DOTFILES_DIR/package/install.sh
 
-if [ "$(uname)" == "Darwin" -a -f "$DOTFILES_DIR/install/osx.sh" ]; then
+if [ "$(uname)" == "Darwin" -a -f "$DOTFILES_DIR/osx/osx.sh" ]; then
+    echo $DOTFILES_DIR
     source "$DOTFILES_DIR/osx/osx.sh"
-elif [ "$(uname)" == "Linux" -a -f "$DOTFILES_DIR/install/osx.sh" ]; then
+elif [ "$(uname)" == "Linux" -a -f "$DOTFILES_DIR/linux/osx.sh" ]; then
     source "$DOTFILES_DIR/linux/linux.sh"
 fi
 
