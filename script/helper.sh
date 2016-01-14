@@ -21,7 +21,7 @@ function installpackage() {
     if [ $(uname)x == "Linux"x ]; then
         type apt-get > /dev/null 2>&1 && installCommand="apt-get -y install" 
         # type yum > /dev/null 2>&1 && installCommand="yum -y install" 
-    elif [ $(name)x == "Darwin"x ]; then
+    elif [ $(uname)x == "Darwin"x ]; then
         # install the package manager tool for OS X if necessary
         if ! type brew &> /dev/null
         then

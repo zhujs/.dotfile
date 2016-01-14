@@ -5,4 +5,4 @@ type tmux > /dev/null 2>&1 || installpackage "tmux"
 
 createSymlink "$TMUX_DIR/tmux.conf" ~/.tmux.conf
 
-unset VIM_DIR
+unset TMUX_DIR
