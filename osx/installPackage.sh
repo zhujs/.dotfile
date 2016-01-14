@@ -3,4 +3,4 @@
 type reattach-to-user-namespace &> /dev/null || brew install reattach-to-user-namespace
 
 # bash completion
-type bash-completion || brew install bash-completion
+brew install bash-completion
