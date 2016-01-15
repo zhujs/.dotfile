@@ -19,9 +19,9 @@ function installpackage() {
 
     # determine how to install the package
     if [ $(uname)x == "Linux"x ]; then
-        type apt-get > /dev/null 2>&1 && installCommand="apt-get -y install" 
-        # type yum > /dev/null 2>&1 && installCommand="yum -y install" 
-    elif [ $(name)x == "Darwin"x ]; then
+        type apt-get > /dev/null 2>&1 && installCommand="sudo apt-get -y install" 
+        # type yum > /dev/null 2>&1 && installCommand="sudo yum -y install" 
+    elif [ $(uname)x == "Darwin"x ]; then
         # install the package manager tool for OS X if necessary
         if ! type brew &> /dev/null
         then
@@ -35,7 +35,7 @@ function installpackage() {
     if [ -z installCommand ]; then
         info "Cannot find the command-line package tool."
     else
-        eval "sudo $installCommand $1"
+        eval "$installCommand $1"
         info "Installation Done."
     fi
 }
