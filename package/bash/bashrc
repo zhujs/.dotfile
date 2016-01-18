@@ -130,26 +130,25 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ $(uname)x == 'Darwin'x ] && [ -f $(brew --prefix)/etc/bash_completion ]
-then
-    . $(brew --prefix)/etc/bash_completion
+if [ $(uname)x == 'darwin'x ] && [ -f $(brew --prefix)/share/bash-completion/bash_completion ]
+ then
+    . $(brew --prefix)/share/bash-completion/bash_completion
 fi
-
 
 if [ -d ~/bin ]; then
     export PATH="$PATH:~/bin"
 fi
 
-
-# Local bin
-PATH=~/Bin:$PATH
+if [ -d ~/lbin ]; then
+    export PATH="$PATH:~/lbin"
+fi
 
 # JAVA
-JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
-PATH=$JAVA_HOME/bin:$PATH
-CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-export JAVA_HOME
-export CLASSPATH
+# JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
+# PATH=$JAVA_HOME/bin:$PATH
+# CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+# export JAVA_HOME
+# export CLASSPATH
 
 # MAVEN
 export M2_HOME=/home/zhujs/Bin/apache-maven-3.2.5
