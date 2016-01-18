@@ -211,6 +211,10 @@ alias ga='git add'
 makeCompletionWrapper git __git_wrap__git_main ga _ga
 complete -o bashdefault -o default -o nospace -F _ga ga
 
+alias gcl='git clone'
+makeCompletionWrapper git __git_wrap__git_main gcl _gcl
+complete -o bashdefault -o default -o nospace -F _gcl gcl
+
 # note that the trailing space in the alias value,
 # so we can refer to the manual page of an alias, e.g.
 #   m pg
