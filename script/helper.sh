@@ -3,7 +3,7 @@
 
 function info() {
     # "$@" is equivalent to "$1" "$2" ...
-    echo -e "$@"
+    echo -e "$(tput setaf 4)[INFO]$(tput sgr0)" "$@"
 }
 
 # used to install the packages
@@ -51,8 +51,8 @@ function backup() {
         backupName=$dirName/$(basename $1)$(date "+%Y%m%d-%H:%M:%S")
         mv "$1" "$backupName" > /dev/null 2>&1
         
-        info "It seems that $1 already exists," \
-            "have made a backup at $backupName"
+        info "$1 already exists," \
+            "backup in $backupName"
 
         unset dirName
     fi
