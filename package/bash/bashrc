@@ -130,7 +130,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ $(uname)x == 'darwin'x ] && [ -f $(brew --prefix)/share/bash-completion/bash_completion ]
+if [ $(uname)x == 'Darwin'x ] && [ -f $(brew --prefix)/share/bash-completion/bash_completion ]
  then
     . $(brew --prefix)/share/bash-completion/bash_completion
 fi
