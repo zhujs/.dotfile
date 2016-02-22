@@ -67,7 +67,12 @@ brew install macvim --override-system-vim --custom-system-icons
 brew tap caskroom/versions
 brew cask install java7
 
+# Maven
+brew install maven
+
 # intellij-idea Community Edition
 brew cask install intellij-idea-ce
+
+brew cask install spark
 
 brew cleanup
