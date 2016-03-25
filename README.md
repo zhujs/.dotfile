@@ -1,5 +1,4 @@
+# Dotfile
+This project is used to sync the programming environment between Ubuntu and Mac OS (I wish it would work in all Uxin-like systems later).
 
-This dotfiles project is used to sync the programming environment in Uxin-like systems.
-
-It provides an automactic way to install the necessary packages and set up the
-configuraion files.
+It provides an automactic way to install the necessary packages and set up the configuraion files.
