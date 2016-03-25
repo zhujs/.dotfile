@@ -221,3 +221,28 @@ complete -o bashdefault -o default -o nospace -F _gcl gcl
 alias m='man '
 makeCompletionWrapper man _man m _m
 complete -F _m m
+
+
+
+# ---------------
+# |  OSX        |
+# ---------------
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+
+export HADOOP_HOME=$localBin/hadoop-2.4.1
+export HBASE_HOME=$localBin/hbase-0.96.1.1-hadoop2
+
+
+
+# ---------------
+# |  Ubuntu     |
+# ---------------
+
+# export JAVA_HOME=$localBin/jdk1.7.0_79
+# export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+# export M2_HOME=$localBin/apache-maven-3.2.5
+# export HADOOP_HOME=$localBin/hadoop-2.4.1
+# export HBASE_HOME=$localBin/hbase-0.96.1.1-hadoop2
+# export HIVE_HOME=$localBin/hive-0.13.1

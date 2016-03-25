@@ -118,11 +118,6 @@ xterm*|rxvt*) PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1" ;
     ;;
 esac
 
-# put all your additions into a separate file
-if [ -f ~/.bash_config ]; then
-    . ~/.bash_config
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -131,7 +126,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 if [ $(uname)x == 'Darwin'x ] && [ -f $(brew --prefix)/share/bash-completion/bash_completion ]
- then
+then
     . $(brew --prefix)/share/bash-completion/bash_completion
 fi
 
@@ -139,32 +134,18 @@ if [ -d ~/bin ]; then
     export PATH="$PATH:~/bin"
 fi
 
-if [ -d ~/lbin ]; then
-    export PATH="$PATH:~/lbin"
+localBin=~/lbin
+if [ -d $localBin ]; then
+    # export PATH="$PATH:$localBin/*/*bin" # doesn't work in OSX
+    for binPath in $localBin/*/*bin
+    do
+        PATH="$PATH:$binPath"
+    done
+    export PATH
 fi
 
-# JAVA
-# JAVA_HOME=/home/zhujs/Bin/jdk1.7.0_79
-# PATH=$JAVA_HOME/bin:$PATH
-# CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-# export JAVA_HOME
-# export CLASSPATH
+# put all your additions into a separate file
+if [ -f ~/.bash_config ]; then
+    . ~/.bash_config
+fi
 
-# MAVEN
-export M2_HOME=/home/zhujs/Bin/apache-maven-3.2.5
-export PATH=$M2_HOME/bin:$PATH
-
-# Intellij
-export PATH=$PATH:/home/zhujs/Bin/idea-IC-141.713.2/bin
-
-# Hadoop
-export HADOOP_HOME=/home/zhujs/Bin/hadoop-2.4.1
-export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/lib
-
-# Hive
-export HIVE_HOME=/home/zhujs/Bin/hive-0.13.1
-export PATH=$PATH:$HIVE_HOME/bin 
-
-# Hbase
-export HBASE_HOME=/home/zhujs/Bin/hbase-0.96.1.1-hadoop2
-export PATH=$PATH:$HBASE_HOME/bin
