@@ -31,6 +31,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'DrawIt'
 "Plugin 'L9'
 "
 " Git plugin not hosted on GitHub
