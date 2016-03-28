@@ -63,6 +63,9 @@ brew install unzip
 brew install vim --override-system-vi
 brew install macvim --override-system-vim --custom-system-icons
 
+# Macdown
+brew cask install macdown
+
 # Java
 brew tap caskroom/versions
 brew cask install java7
@@ -74,5 +77,9 @@ brew install maven
 brew cask install intellij-idea-ce
 
 brew cask install spark
+brew cask install cheatsheet
+brew cask install alfred
+
+brew cask install fals
 
 brew cleanup
