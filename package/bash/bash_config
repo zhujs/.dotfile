@@ -232,6 +232,7 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
 
 export HADOOP_HOME=$localBin/hadoop-2.4.1
 export HBASE_HOME=$localBin/hbase-0.96.1.1-hadoop2
+export HIVE_HOME=$localBin/hive-0.13.1
 
 
 
