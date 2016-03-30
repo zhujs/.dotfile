@@ -12,3 +12,15 @@ com! -nargs=* -bar AllSubstitute
 vmap <F3> :AllSubstitute 
 nmap <F3> :AllSubstitute 
 imap <F3> <C-O>:AllSubstitute 
+
+
+" toggle 'completeopt' for davidhalter/jedi-vim plugin
+autocmd FileType python nnoremap <leader>q :call CompleteoptToggle_R()<cr>
+
+function! CompleteoptToggle_R() abort
+    if &completeopt =~ 'preview'
+        set completeopt-=preview
+    else
+        set completeopt+=preview
+    endif
+endfunction

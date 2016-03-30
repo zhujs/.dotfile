@@ -136,6 +136,7 @@ fi
 
 localBin=~/lbin
 if [ -d $localBin ]; then
+    PATH="$PATH:$localBin"
     # export PATH="$PATH:$localBin/*/*bin" # doesn't work in OSX
     for binPath in $localBin/*/*bin
     do

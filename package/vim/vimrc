@@ -29,6 +29,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'davidhalter/jedi-vim'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'DrawIt'
@@ -61,6 +62,11 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" For 'davidhalter/jedi-vim'
+" disable the docstring window
+autocmd FileType python set completeopt-=preview
+
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
