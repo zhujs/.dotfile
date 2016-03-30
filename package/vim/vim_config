@@ -4,6 +4,7 @@
 func! Substitute_R(old, new, ...) abort
     let flag = a:0 > 0 ? a:1 : 'g'
     exec ':%s/'.a:old.'/'.a:new.'/'.flag
+    exe "normal \<C-O>"
 endf
     
 com! -nargs=* -bar AllSubstitute 
