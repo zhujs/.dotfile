@@ -38,13 +38,7 @@ complete -F _completemarks j jump unmark
 
 extract() {
     if [ -f "$1" ]; then
-        outputDir=$(pwd)
-        if [ -d "$2" ]; then
-            outputDir="$2"
-        else
-            echo "The output directory doesn't exist, use the current working directory instead."
-        fi
-
+        outputDir=${2:-$(pwd)}
         # 在case语句里，双分号;;类似于break语句，还有特殊的符号： ;&及;;&
         case "$1" in
             # 也可以使用 =~ 来测试正则表达式，不过这个更简单
@@ -85,6 +79,7 @@ alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 alias c='cat'
+alias bd='. bd -s'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
