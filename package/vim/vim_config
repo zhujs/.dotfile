@@ -25,3 +25,7 @@ function! CompleteoptToggle_R() abort
         set completeopt+=preview
     endif
 endfunction
+
+
+" %: register contains the name current file
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
