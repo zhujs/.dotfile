@@ -28,8 +28,29 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"let g:airline#extensions#tabline#enabled = 1
+
+Plugin 'majutsushi/tagbar'
+nmap <F10> :TagbarToggle<CR>
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" toggle NERDTree
+" map <F4> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif <CR>
+map <F4> :NERDTreeToggle <Bar> wincmd p <CR>
+
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = './bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+
+Plugin 'rdnetto/YCM-Generator'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'DrawIt'
