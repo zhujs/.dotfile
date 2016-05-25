@@ -15,6 +15,7 @@ endif
 set nocompatible
 
 filetype off                  " required
+let mapleader = ","
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -33,6 +34,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Lokaltog/vim-easymotion'
 "let g:airline#extensions#tabline#enabled = 1
 
 Plugin 'majutsushi/tagbar'
@@ -47,10 +49,26 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <F4> :NERDTreeToggle <Bar> wincmd p <CR>
 
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = './bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_complete_in_comments=1
+let g:ycm_min_num_of_chars_for_completion=1
+let g:ycm_cache_omnifunc=0
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_key_invoke_completion = '<leader>mm'
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 Plugin 'rdnetto/YCM-Generator'
+Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_show_hidden = 1
+
+"Plugin 'SirVer/ultisnips'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'DrawIt'
@@ -190,7 +208,6 @@ set softtabstop=4               " Let backspace delete indent
 set nojoinspaces                " Prevents inserting two spaces after punctuation on a join (J)
    
 inoremap jk <ESC>
-let mapleader = ","
 
 " Toggle spelling visuals with <leader>s
 nnoremap <leader>s :set spell!<CR>
