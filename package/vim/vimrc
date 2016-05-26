@@ -67,8 +67,10 @@ nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 Plugin 'rdnetto/YCM-Generator'
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_show_hidden = 1
+nnoremap <C-j> :CtrlPBuffer<CR>
 
-"Plugin 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 "
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'DrawIt'
