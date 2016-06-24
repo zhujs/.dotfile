@@ -64,6 +64,7 @@ brew install vim --override-system-vi
 brew install macvim --override-system-vim --custom-system-icons
 brew install cmake
 brew install ctags
+brew install tig
 
 # Macdown
 brew cask install macdown

@@ -12,5 +12,9 @@ type xclip || installpackage xlcip
 
 
 # ipython
-installpackage ipython
+ipython || installpackage ipython
+installpackage python-dev
+
+
+type cmake || installpackage cmake
 
