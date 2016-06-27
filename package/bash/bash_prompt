@@ -95,9 +95,9 @@ function prompt_git() {
       END {print r}'
   )"
   if [[ "$flags" ]]; then
-    output="\[${cyan}\]$output\[${white}\]:\[${cyan}\]$flags"
+    output="\[${cyan}\]$output\[${white}\]:\[${red}\]$flags"
   fi
-  echo "\[${white}\][$output\[${white}\]]"
+  echo "\[${white}\][\[${cyan}\]$output\[${white}\]]"
 }
 
 
