@@ -1,0 +1,150 @@
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+# Cursor Movement using escape sequences, <L>, <C>, <N> should be replaced with numbers, `tput` is the encouraged way to send the escape sequences
+# More infomation about escape sequence:
+#   https://en.wikipedia.org/wiki/ANSI_escape_code
+#
+# Puts the cursor at line L and column C.
+#   \033[<L>;<C>H Or \033[<L>;<C>f
+# Move the cursor up N lines:
+#   \033[<N>A
+# Move the cursor down N lines:
+#   \033[<N>B
+# Move the cursor forward N columns:
+#   \033[<N>C
+# Move the cursor backward N columns:
+#   \033[<N>D
+#
+# Clear the screen, move to (0,0):
+#   \033[2J
+# Erase to end of line:
+#   \033[K
+# Save cursor position:
+#   \033[s
+# Restore cursor position:
+#   \033[u
+
+
+if tput setaf 1 &> /dev/null; then
+    tput sgr0; # reset colors
+    bold=$(tput bold);
+    reset=$(tput sgr0);
+    # Solarized colors, taken from http://git.io/solarized-colors.
+    black=$(tput setaf 0);
+    blue=$(tput setaf 33);
+    cyan=$(tput setaf 37);
+    green=$(tput setaf 64);
+    orange=$(tput setaf 166);
+    purple=$(tput setaf 125);
+    red=$(tput setaf 124);
+    violet=$(tput setaf 61);
+    white=$(tput setaf 15);
+    yellow=$(tput setaf 136);
+else
+    bold='';
+    reset="\e[0m";
+    black="\e[1;30m";
+    blue="\e[1;34m";
+    cyan="\e[1;36m";
+    green="\e[1;32m";
+    orange="\e[1;33m";
+    purple="\e[1;35m";
+    red="\e[1;31m";
+    violet="\e[1;35m";
+    white="\e[1;37m";
+    yellow="\e[1;33m";
+fi;
+
+# Exit code of previous command.
+function prompt_exitcode() {
+  [[ $1 != 0 ]] && echo " \[${red}\]$1\[${reset}\] "
+}
+
+# Git status.
+function prompt_git() {
+  local status output flags branch
+  status="$(git status 2>/dev/null)"
+  [[ $? != 0 ]] && return;
+  output="$(echo "$status" | awk '/# Initial commit/ {print "(init)"}')"
+  [[ "$output" ]] || output="$(echo "$status" | awk '/# On branch/ {print $4}')"
+  [[ "$output" ]] || output="$(git branch | perl -ne '/^\* \(detached from (.*)\)$/ ? print "($1)" : /^\* (.*)/ && print $1')"
+  flags="$(
+    echo "$status" | awk 'BEGIN {r=""} \
+        /^(# )?Changes to be committed:$/        {r=r "+"}\
+        /^(# )?Changes not staged for commit:$/  {r=r "!"}\
+        /^(# )?Untracked files:$/                {r=r "?"}\
+      END {print r}'
+  )"
+  if [[ "$flags" ]]; then
+    output="\[${cyan}\]$output\[${white}\]:\[${cyan}\]$flags"
+  fi
+  echo "\[${white}\][$output\[${white}\]]"
+}
+
+
+# Maintain a per-execution call stack.
+prompt_stack=()
+trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
+
+function prompt_command() {
+    local exit_code=$?
+
+    # If the first command in the stack is prompt_command, no command was run.
+    # Set exit_code to 0 and reset the stack.
+    [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
+    prompt_stack=()
+
+    # git: [branch:flags]
+    PS1="\n"
+    PS1="\[${bold}\]${PS1}$(prompt_git)"
+    PS1="$PS1\[${white}\][\[${cyan}\]\u@\h\[${white}\]:\[${cyan}\]\w\[${white}\]]"
+    # date: [HH:MM:SS]
+    PS1="$PS1\[${white}\][\[${cyan}\]$(date +"%H\[${white}\]:\[${cyan}\]%M\[${white}\]:\[${cyan}\]%S")\[${white}\]]"
+    PS1="$PS1\n"
+    # exit code: 127
+    PS1="$PS1$(prompt_exitcode "$exit_code")"
+    PS1="$PS1\$ \[${reset}\]"
+}
+
+
+if [ "$color_prompt" = yes ]; then
+    # "\e[sm", where s is a semicolon-delimited list of ANSI color codes
+    # example: "\e[31;44;1m"
+    # The codes:
+    # 0  restore default color
+    # 1  brighter
+    # 2  dimmer
+    # 4  underlined text
+    # 5  flashing text
+    # 7  reverse video
+    #           black  red  green  yellow  blue  purple  cyan  white
+    # foreground  30    31    32    33    34       35    36      37
+    # background  40    41    42    43    44       45    46      47
+    #
+    # the escape sequence "\e]0;s\a" is used to set the title of an xterm,
+    # where s is the string you want to use
+    PROMPT_COMMAND="prompt_command"
+else
+    PS1='\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+

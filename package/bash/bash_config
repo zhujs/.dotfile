@@ -1,3 +1,4 @@
+
 # put useful commands here
 export MARKPATH=$HOME/.marks
 
@@ -90,7 +91,15 @@ alias j='jump'
 alias e='extract'
 alias rm='rm -i'
 alias p='python'
-alias ..='cd ..'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias -- -="cd -"
+
+# re-execute the last history command
+alias r="fc -s"
+
 
 type ipython > /dev/null 2>&1 && alias p='ipython'
 type vim > /dev/null 2>&1 && alias v='vim'
@@ -148,15 +157,6 @@ function $aliasCompFunc {
 
 # usage of makeCompletionWrapper function
 
-# alias setting for `apt`
-alias get='sudo apt-get install'
-makeCompletionWrapper sudo _sudo get _get
-complete -F _get get
-
-alias drop='sudo apt-get remove'
-makeCompletionWrapper sudo _sudo drop _drop
-complete -F _drop drop
-
 # alias setting for `git`
 alias gp='git push'
 makeCompletionWrapper git __git_wrap__git_main gp _gp
@@ -212,11 +212,50 @@ complete -o bashdefault -o default -o nospace -F _gcl gcl
 
 # note that the trailing space in the alias value,
 # so we can refer to the manual page of an alias, e.g.
-#   m pg
+#       m pg
 alias m='man '
 makeCompletionWrapper man _man m _m
 complete -F _m m
 
+
+#  +-------------------+
+#  |System independent |
+#  +-------------------+
+
+if [ "$(uname)"x == "Darwin"x ]
+then
+    if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]
+    then
+        . $(brew --prefix)/share/bash-completion/bash_completion
+    fi
+
+    # alias setting for `brew`
+    alias get='brew install'
+    makeCompletionWrapper brew _brew get _get
+    complete -o bashdefault -o default -F _get get
+
+    alias drop='brew remove'
+    makeCompletionWrapper brew _brew drop _drop
+    complete -o bashdefault -o default -F _drop drop
+
+    alias search='brew search'
+    makeCompletionWrapper brew _brew search _search
+    complete -o bashdefault -o default -F _search search
+
+elif [ "$(uname)"x == "Linux"x ]; then
+    # alias setting for `apt`
+    alias get='sudo apt-get install'
+    makeCompletionWrapper sudo _sudo get _get
+    complete -F _get get
+
+    alias drop='sudo apt-get remove'
+    makeCompletionWrapper sudo _sudo drop _drop
+    complete -F _drop drop
+
+    alias search='sudo apt-get search'
+    makeCompletionWrapper sudo _sudo search _search
+    complete -F _search search
+fi
 
 
 # ---------------
