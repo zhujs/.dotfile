@@ -1,4 +1,11 @@
 
+if [ "$(uname)"x == "Darwin"x ]
+then
+    # use GNU commands in Max OS
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
 # put useful commands here
 export MARKPATH=$HOME/.marks
 
@@ -64,27 +71,30 @@ extract() {
 
 # put you aliases here
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+if type dircolors > /dev/null 2>&1
+then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias ll='ls -alFh'
+    alias la='ls -A'
+    alias l='ls -CF'
+
+    # List only directories
+    alias lsd="ls -lF | grep --color=never '^d'"
+
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -alFh'
-alias la='ls -A'
-alias l='ls -CF'
 alias c='cat'
 alias bd='. bd -s'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias dc="cd ~/Documents"
 
 
 alias j='jump'
@@ -99,7 +109,7 @@ alias -- -="cd -"
 
 # re-execute the last history command
 alias r="fc -s"
-
+alias sudo='sudo '
 
 type ipython > /dev/null 2>&1 && alias p='ipython'
 type vim > /dev/null 2>&1 && alias v='vim'
@@ -219,7 +229,7 @@ complete -F _m m
 
 
 #  +-------------------+
-#  |System independent |
+#  |System dependent   |
 #  +-------------------+
 
 if [ "$(uname)"x == "Darwin"x ]
@@ -228,9 +238,6 @@ then
     then
         . $(brew --prefix)/share/bash-completion/bash_completion
     fi
-
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
     # alias setting for `brew`
     alias get='brew install'
@@ -246,6 +253,10 @@ then
     complete -o bashdefault -o default -F _search search
 
 elif [ "$(uname)"x == "Linux"x ]; then
+    # Add an "alert" alias for long running commands.  Use like so:
+    #   sleep 10; alert
+    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
     # alias setting for `apt`
     alias get='sudo apt-get install'
     makeCompletionWrapper sudo _sudo get _get
