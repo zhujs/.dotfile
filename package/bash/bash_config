@@ -229,6 +229,9 @@ then
         . $(brew --prefix)/share/bash-completion/bash_completion
     fi
 
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
     # alias setting for `brew`
     alias get='brew install'
     makeCompletionWrapper brew _brew get _get

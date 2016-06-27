@@ -32,8 +32,6 @@ brew install make
 
 # install more GNU-tools
 brew install coreutils 
-#PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-#MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 brew tap homebrew/dupes
 brew install binutils
 brew install diffutils
