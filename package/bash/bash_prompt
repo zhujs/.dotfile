@@ -148,6 +148,9 @@ if [ "$color_prompt" = yes ]; then
     # the escape sequence "\e]0;s\a" is used to set the title of an xterm,
     # where s is the string you want to use
     PROMPT_COMMAND="prompt_command"
+
+    # Enable bash history in multi-terminals
+    export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 else
     PS1='\u@\h:\w\$ '
 fi

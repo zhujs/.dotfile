@@ -96,11 +96,10 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias dc="cd ~/Documents"
 
-
 alias j='jump'
 alias e='extract'
 alias rm='rm -i'
-alias p='python'
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -119,7 +118,7 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-type ipython > /dev/null 2>&1 && alias p='ipython'
+alias serve='ips; python -m SimpleHTTPServer 8080'
 type vim > /dev/null 2>&1 && alias v='vim'
 
 
@@ -174,6 +173,10 @@ function $aliasCompFunc {
 
 
 # usage of makeCompletionWrapper function
+alias p='python'
+type ipython > /dev/null 2>&1 && alias p='ipython'
+makeCompletionWrapper python _python p _p
+complete -F _p p
 
 # alias setting for `git`
 alias gp='git push'
