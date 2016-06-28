@@ -266,7 +266,7 @@ elif [ "$(uname)"x == "Linux"x ]; then
     makeCompletionWrapper sudo _sudo drop _drop
     complete -F _drop drop
 
-    alias search='sudo apt-get search'
+    alias search='sudo apt-cache  search'
     makeCompletionWrapper sudo _sudo search _search
     complete -F _search search
 fi
