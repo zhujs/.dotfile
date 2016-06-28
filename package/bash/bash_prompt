@@ -153,3 +153,4 @@ else
 fi
 unset color_prompt force_color_prompt
 
+ # vim: set filetype=sh:
