@@ -150,7 +150,7 @@ if [ "$color_prompt" = yes ]; then
     PROMPT_COMMAND="prompt_command"
 
     # Enable bash history in multi-terminals
-    PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+    PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -c; history -r"
 
     export HISTTIMEFORMAT="%F %T "
     export PROMPT_COMMAND="$PROMPT_COMMAND; "'echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history;'
