@@ -128,6 +128,10 @@ function prompt_command() {
     # exit code: 127
     PS1="$PS1$(prompt_exitcode "$exit_code")"
     PS1="$PS1\$ \[${reset}\]"
+
+    # Enable bash history in multi-terminals
+    history -a; history -c; history -r
+    echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history;
 }
 
 
@@ -147,14 +151,8 @@ if [ "$color_prompt" = yes ]; then
     #
     # the escape sequence "\e]0;s\a" is used to set the title of an xterm,
     # where s is the string you want to use
-    PROMPT_COMMAND="prompt_command"
-
-    # Enable bash history in multi-terminals
-    PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -c; history -r"
-
     export HISTTIMEFORMAT="%F %T "
-    export PROMPT_COMMAND="$PROMPT_COMMAND; "'echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history;'
-
+    PROMPT_COMMAND="prompt_command"
 else
     PS1='\u@\h:\w\$ '
 fi
