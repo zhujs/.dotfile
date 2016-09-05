@@ -155,6 +155,7 @@ alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 alias serve='ips; python -m SimpleHTTPServer 8080'
+alias sj='python -m json.tool'
 type vim > /dev/null 2>&1 && alias v='vim'
 
 
