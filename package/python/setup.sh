@@ -18,6 +18,6 @@ type pip > /dev/null 2>&1 || installpackage python-pip
 installpackage python-dev > /dev/null 2>&1
 
 # more packages
-sudo pip install percol
+# sudo pip install percol
 
 unset PYTHON_DIR
