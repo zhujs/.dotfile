@@ -10,11 +10,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # install xclip
 type xclip || installpackage xlcip
 
-
-# ipython
-ipython || installpackage ipython
-installpackage python-dev
-
-
 type cmake || installpackage cmake
 
+type shellcheck || installpackage shellcheck
+type tree || installpackage tree
