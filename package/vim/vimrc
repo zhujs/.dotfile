@@ -191,6 +191,11 @@ set number "show line number
 set autoindent	
 set smartindent
 
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+"Character encoding used inside Vim
+set encoding=utf-8
+
 set complete+=k/usr/share/dict/words "set dictionary file
 set showfulltag
 

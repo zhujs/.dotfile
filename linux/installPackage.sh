@@ -16,3 +16,5 @@ type shellcheck || installpackage shellcheck
 type tree || installpackage tree
 
 type ctags || installpackage exuberant-ctags
+
+type dos2unix || installpackage dos2unix
