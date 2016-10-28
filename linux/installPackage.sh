@@ -19,3 +19,4 @@ type ctags || installpackage exuberant-ctags
 
 type clang || installpackage clang
 
+type dos2unix || installpackage dos2unix
