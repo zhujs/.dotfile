@@ -132,6 +132,8 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias dc="cd ~/Documents"
 
+alias mk="mkdir "
+
 alias j='jump'
 alias e='extract'
 alias rm='rm -i'
