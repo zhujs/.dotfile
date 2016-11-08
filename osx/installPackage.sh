@@ -12,13 +12,15 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade --all
 
+brew tap homebrew/dupes
+brew tap homebrew/versions
+
 # tool to access the OSX's clipboard in tmux
 #     http://www.economyofeffort.com/2013/07/29/reattach-to-user-namespace-the-fix-for-your-tmux-in-os-x-woes/
 type reattach-to-user-namespace &> /dev/null || brew install reattach-to-user-namespace
 
 # update bash and install bash-completion
 brew install bash
-brew tap homebrew/versions
 brew install bash-completion2
 
 # install brew-cask
@@ -32,7 +34,6 @@ brew install make
 
 # install more GNU-tools
 brew install coreutils 
-brew tap homebrew/dupes
 brew install binutils
 brew install diffutils
 brew install ed --default-names
@@ -69,7 +70,6 @@ brew install tree
 brew cask install macdown
 
 # Java
-brew tap caskroom/versions
 brew cask install java7
 
 # Maven
@@ -81,7 +81,6 @@ brew cask install intellij-idea-ce
 brew cask install spark
 brew cask install cheatsheet
 brew cask install alfred
-
 brew cask install fals
 
 brew cleanup
