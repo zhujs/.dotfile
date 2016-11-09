@@ -23,9 +23,11 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
+set bind-tty-special-chars off
+
 # quote the current or previous word
 "\C-xq": "\eb\"\ef\""
 "\C-\M-n": history-search-backward
 "\C-\M-m": history-search-forward
 "\C-o": forward-search-history
-
+"\C-w": unix-filename-rubout
