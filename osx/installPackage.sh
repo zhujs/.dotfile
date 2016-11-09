@@ -36,7 +36,6 @@ brew install make
 brew install coreutils 
 brew install binutils
 brew install diffutils
-brew install ed --default-names
 brew install findutils --with-default-names
 brew install gawk
 brew install gnu-indent --with-default-names
@@ -46,7 +45,6 @@ brew install gnu-which --with-default-names
 brew install gnutls
 brew install grep --with-default-names
 brew install gzip
-brew install screen
 brew install watch
 brew install wdiff --with-gettext
 brew install wget --with-iri
@@ -70,17 +68,16 @@ brew install tree
 brew cask install macdown
 
 # Java
-brew cask install java7
+brew cask install java
 
 # Maven
 brew install maven
 
 # intellij-idea Community Edition
-brew cask install intellij-idea-ce
+brew cask install intellij-idea
 
 brew cask install spark
 brew cask install cheatsheet
 brew cask install alfred
-brew cask install fals
 
 brew cleanup
