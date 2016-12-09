@@ -8,9 +8,10 @@ function info() {
 
 # used to install the packages
 function installpackage() {
+    if [ "$INSTALL" == "false" ]; then
+        return
+    fi
     local installCommand=""
-    
-    info "Try to install $1 ..."
     
     if type "$1" > /dev/null 2>&1; then
         info "$1 already exists."
@@ -19,15 +20,15 @@ function installpackage() {
 
     # determine how to install the package
     if [ $(uname)x == "Linux"x ]; then
-        type apt-get > /dev/null 2>&1 && installCommand="sudo apt-get -y install" 
+        type apt-get > /dev/null 2>&1 && installCommand="sudo apt-get -y install"
         # type yum > /dev/null 2>&1 && installCommand="sudo yum -y install" 
     elif [ $(uname)x == "Darwin"x ]; then
         # install the package manager tool for OS X if necessary
         if ! type brew &> /dev/null
         then
-            info "Trying to install Homebrew..."
+            info "Trying to install Homebrew first..."
             ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-            info "Installation Completed."
+            info "Installation of brew Completed."
         fi
         installCommand="brew install"
     fi 
@@ -35,6 +36,7 @@ function installpackage() {
     if [ -z installCommand ]; then
         info "Cannot find the command-line package tool."
     else
+        info "Try to install $1 ..."
         eval "$installCommand $1"
         info "Installation Done."
     fi

@@ -8,15 +8,15 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # install xclip
-type xclip || installpackage xlcip
+type xclip &> /dev/null || installpackage xlcip
 
-type cmake || installpackage cmake
+type cmake &> /dev/null || installpackage cmake
 
-type shellcheck || installpackage shellcheck
-type tree || installpackage tree
+type shellcheck &> /dev/null || installpackage shellcheck
+type tree &> /dev/null || installpackage tree
 
-type ctags || installpackage exuberant-ctags
+type ctags &> /dev/null || installpackage exuberant-ctags
 
-type clang || installpackage clang
+type clang &> /dev/null || installpackage clang
 
-type dos2unix || installpackage dos2unix
+type dos2unix &> /dev/null || installpackage dos2unix

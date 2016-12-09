@@ -3,7 +3,7 @@ BASH_DIR="$( (cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd) )"
 # update bash version in OSX
 if [ "$(uname)x" == "Darwin" ]
 then
-    brew install bash
+    installpackage bash
 fi
 
 createSymlink "$BASH_DIR/bashrc" ~/.bashrc
