@@ -1,4 +1,4 @@
 
 # send no-op code to server every 60 seconds to keey the connection alive
 Host *
- ServerAliveInterval 60
+    ServerAliveInterval 10

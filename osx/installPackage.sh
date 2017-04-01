@@ -76,7 +76,9 @@ if [ "$INSTALL" == "true" ]; then
     brew install maven
 
     # intellij-idea Community Edition
-    brew cask install intellij-idea
+    brew cask install intellij-idea-ce
+    brew cask install firefox
+    brew cask install sublime-text
 
     brew cask install spark
     brew cask install cheatsheet
