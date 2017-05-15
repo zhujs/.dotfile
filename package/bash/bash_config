@@ -279,6 +279,16 @@ complete -F _m m
 
 
 #  +-------------------+
+#  |Python setting     |
+#  +-------------------+
+
+# virtualenv
+export PROJECT_HOME=~/poleved/python/
+mkdir -p ${PROJECT_HOME}
+source /usr/local/bin/virtualenvwrapper.sh &> /dev/null
+
+
+#  +-------------------+
 #  |System dependent   |
 #  +-------------------+
 
